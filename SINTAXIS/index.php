@@ -69,6 +69,31 @@
         echo "Hola, buenas noches $saludo";
 
         echo 'Hola, buenas noches $saludo';
+
+        #Declarando un objeto
+        /**
+         * persona: {
+         *     nombre: "Diego",
+         *      apellido: "Hernan"
+         * }
+         */
+
+        #clases
+        class Persona{
+            //public, private, protected
+            public $nombre;
+            public $apellido;
+
+            //metodos
+
+        }
+
+        echo "<br>";
+        #llamamos la clase
+        $persona = new Persona();
+        $persona->nombre = "Diego";
+        $persona->apellido = "Hernan";
+        print_r($persona);
     ?>
     <h2></h2>
 </body>
