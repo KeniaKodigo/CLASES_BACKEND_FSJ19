@@ -65,6 +65,11 @@ class Libro{
         }
     }
 
+    //metodo para imprimir la informacion del libro
+    public function imprimirInformacion(){
+        echo "<strong>Titulo: </strong> $this->titulo<br><strong>Edicion: </strong> $this->edicion<br><strong>Descripcion: </strong> $this->descripcion<br><strong>Autor: </strong> $this->autor<br><strong>Categoria: </strong> $this->categoria<br>";
+    }
+
     //metodos estaticos
     public static function infor(){
         //code
