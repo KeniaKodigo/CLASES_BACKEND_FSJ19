@@ -26,7 +26,8 @@
         //instanciamos la clase Estudiantes
         $estudiantes = new Estudiante();
         $arreglo_bootcamps = $estudiantes->getBootcamps();
-        print_r($arreglo_bootcamps);
+        //print_r($arreglo_bootcamps);
+        $arreglo_materias = $estudiantes->getMaterias();
     ?>
     
     <main id="main">
@@ -50,13 +51,27 @@
                 <input type="text" class="form-control" name="correo" required>
 
                 <label for="">Seleccione Bootcamp</label>
-                <select name="bootcamp" class="form-control" id=""></select>
+                <select name="bootcamp" class="form-control" id="">
+                    <option value="">...</option>
+                    <!--- iteramos los bootcamps que hay en la bd -->
+                    <?php
+                        foreach($arreglo_bootcamps as $bootcamp){
+                    ?>
+                        <option value="<?php echo $bootcamp["id"]; ?>"><?php echo $bootcamp["bootcamp"]; ?></option>
+                    <?php } ?>
+                </select>
 
-                <label for="">Seleccione Materias</label>
-                <input type="checkbox" >
-
+                <label for="">Seleccione Materias</label><br>
+                <?php
+                        foreach($arreglo_materias as $materia){
+                    ?>
+                        <input type="checkbox" name="materias[]" value="<?php echo $materia["id"]; ?>"> <?php echo $materia["materia"]; ?>
+                <?php } ?>
+                <br>
                 <input type="submit" class="btn btn-dark mt-4" value="Guardar Datos">
             </form>
+
+            <?php $estudiantes->guardar(); ?>
         </section>
     </main>
     <?php include "./modulos/footer.php";  ?>

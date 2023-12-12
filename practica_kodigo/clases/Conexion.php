@@ -20,7 +20,7 @@ class Conexion{
             ];
     
             //creamos la instancia de PDO (conectarnos), asignamos usuario y password y las opciones para la conexion
-            $pdo = new PDO($conexion, "root", "",$opciones);
+            $pdo = new PDO($conexion, "root","",$opciones);
             return $pdo;
             
         }catch(PDOException $e){
