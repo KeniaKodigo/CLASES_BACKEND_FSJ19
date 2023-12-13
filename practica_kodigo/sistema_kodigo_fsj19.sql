@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2023 a las 03:03:07
+-- Tiempo de generación: 13-12-2023 a las 04:14:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -41,7 +41,8 @@ INSERT INTO `bootcamps` (`id`, `bootcamp`) VALUES
 (2, 'Full Stack Junior 18'),
 (3, 'Full Stack Junior 19'),
 (4, 'Java Developer 5'),
-(5, 'Web Developer 6');
+(5, 'Web Developer 6'),
+(6, 'Web Developer 7');
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,12 @@ INSERT INTO `detalle_estudiante_materia` (`id_estudiante`, `id_materia`) VALUES
 (1, 2),
 (2, 1),
 (2, 2),
-(2, 3);
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3),
+(4, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -140,8 +146,10 @@ CREATE TABLE `estudiantes` (
 --
 
 INSERT INTO `estudiantes` (`id`, `nombre`, `direccion`, `telefono`, `carnet`, `correo`, `password`, `id_bootcamp`, `id_estado`, `id_rol`) VALUES
-(1, 'Diego Alexander Vasquez', 'Usulutan', 7890745, 'KD0003', 'diego@gmail.com', 'Kodigo2023', 4, 1, 3),
-(2, 'Jose Luis Villalta', 'San Ignacio, Chalatenango', 70894567, 'KJ004', 'luis@hotmail.com', 'Kodigo2023', 1, 1, 3);
+(1, 'Diego Alexander Vasquez', 'Tejutla, Chalate', 7890745, 'KD0002023', 'diego@gmail.com', 'Kodigo2023', 2, 1, 3),
+(2, 'Jose Luis Villalta', 'San Ignacio, Chalatenango', 70894567, 'KJ004', 'luis@hotmail.com', 'Kodigo2023', 3, 1, 3),
+(3, 'Claudia Vasquez Hernandez', 'Citala, Chalatenango', 78542123, 'pr2023', 'clauvasquez@yahoo.com', 'Kodigo2023', 4, 1, 3),
+(4, 'prueba2', 'prueba2dire', 76546373, 'prueba2023', 'prueba@hotmail.com', 'Kodigo2023', 3, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -251,7 +259,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `bootcamps`
 --
 ALTER TABLE `bootcamps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `coaches`
@@ -269,7 +277,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `estudiantes`
 --
 ALTER TABLE `estudiantes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`
