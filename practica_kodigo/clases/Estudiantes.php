@@ -93,6 +93,63 @@ class Estudiante extends Conexion{
 
                     $query3->execute([$id_estudiante, $arreglo_materias[$i]]);
                 }
+
+                //redireccionando a la vista de la tabla de estudiantes
+
+                //header('location = ./estudiantes_activos.php');
+                echo "<script>
+                    window.location = './estudiantes_activos.php'
+                </script>";
+            }
+        }
+    }
+
+    #metodo para obtener todos los estudiantes activos, asincronos, reubicacion
+    public function obtenerEstudiantes(){
+        $pdo = $this->conectar();
+
+        $query = $pdo->query("SELECT estudiantes.id, estudiantes.nombre, estudiantes.carnet, estudiantes.correo, bootcamps.bootcamp, estado.estado FROM estudiantes INNER JOIN bootcamps ON estudiantes.id_bootcamp = bootcamps.id INNER JOIN estado ON estudiantes.id_estado = estado.id WHERE estado.estado != 'desercion'");
+
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC); //arreglo de objetos
+        return $resultado;
+    }
+
+    #metodo para obtener un estudiante por id
+    public function obtenerById(){
+        if(isset($_POST['id_estudiante'])){
+            $this->id = $_POST['id_estudiante'];
+
+            $pdo = $this->conectar();
+            $query = $pdo->query("SELECT id, nombre, direccion, telefono, correo FROM estudiantes WHERE id = $this->id");
+
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC); //arreglo de objetos
+            return $resultado;
+        }
+    }
+
+    #metodo para actualizar estudiante por su id
+    public function actualizar(){
+        if(isset($_POST['id_estudiante'], $_POST['nombre'], $_POST['direccion'], $_POST['telefono'], $_POST['correo'])){
+            $this->nombre = $_POST['nombre'];
+            $this->direccion = $_POST['direccion'];
+            $this->telefono = $_POST['telefono'];
+            $this->correo = $_POST['correo'];
+            $this->id = $_POST['id_estudiante'];
+
+            $pdo = $this->conectar();
+            $query = $pdo->prepare("UPDATE estudiantes SET nombre = ?, direccion = ?, telefono = ?, correo = ? WHERE id = ?");
+
+            $resultado = $query->execute(["$this->nombre","$this->direccion","$this->telefono","$this->correo","$this->id"]);
+
+            //si es un exito (true) redireccionamos a la vista de los estudiantes
+            if($resultado){
+                echo "<script>
+                    window.location = './estudiantes_activos.php'
+                </script>";
+            }else{
+                echo "Error al actualizar al estudiante";
             }
         }
     }

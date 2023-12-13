@@ -21,6 +21,9 @@
 
 <body>
     <?php include "./modulos/header.php"; 
+        require "./clases/Estudiantes.php";
+        $estudiante = new Estudiante();
+        $arreglo_estudiante = $estudiante->obtenerEstudiantes();
     ?>
     
     <main id="main">
@@ -35,9 +38,33 @@
                     <th>Carnet</th>
                     <th>Correo</th>
                     <th>Bootcamp</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <?php foreach($arreglo_estudiante as $item) { ?>
+                        <tr>
+                            <td><?php echo $item['nombre']; ?></td>
+                            <td><?php echo $item['carnet']; ?></td>
+                            <td><?php echo $item['correo']; ?></td>
+                            <td><?php echo $item['bootcamp']; ?></td>
+                            <td><?php echo $item['estado']; ?></td>
+                            <td>
+                                <form action="./actualizar_estudiante.php" method="post">
+                                    <!-- input que captura el id de cada estudiante -->
+                                    <input type="hidden" name="id_estudiante" value="<?php echo $item['id']; ?>">
+                                    <input type="submit" class="btn btn-primary" value="Editar">
+                                </form>
+                            </td>
+                            <td>
+                                <button>Estado</button>
+                            </td>
+                            <td>
+                                <button>Reubicar</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </section>
     </main>
