@@ -24,6 +24,8 @@
         require "./clases/Estudiantes.php";
         $estudiante = new Estudiante();
         $arreglo_estudiante = $estudiante->obtenerEstudiantes();
+        $arreglo_estado = $estudiante->estadoByAsincronoActivoDesercion();
+        $arreglo_bootcamps = $estudiante->getBootcamps();
     ?>
     
     <main id="main">
@@ -57,12 +59,82 @@
                                 </form>
                             </td>
                             <td>
-                                <button>Estado</button>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEstado<?php echo $item['id']; ?>">Estado</button>
                             </td>
                             <td>
-                                <button>Reubicar</button>
+                                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalReubicacion<?php echo $item['id']; ?>">Reubicar</button>
                             </td>
                         </tr>
+
+                        <!-- Modal del estado -->
+                        <div class="modal fade" id="ModalEstado<?php echo $item['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cambio de Estado</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="" method="POST">
+                                    <div class="modal-body">
+                                        <!-- mando el id del estudiante -->
+                                        <input type="hidden" name="id_estudiante" value="<?php echo $item['id']; ?>">
+
+                                        <h5><?php echo $item['nombre']; ?></h5>
+                                        <p><strong>Estado: </strong>Activo</p>
+                                        <label for="" class="form-label">Cambio de Estado</label>
+                                        <select name="estado" id="" class="form-control">
+                                            <?php foreach($arreglo_estado as $estado){ ?>
+                                                <option value="<?php echo $estado['id']; ?>"><?php echo $estado['estado']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <input type="submit" class="btn btn-danger" value="Cambiar Estado">
+                                    </div>
+                                </form>
+
+                                <?php $estudiante->actualizarEstado(); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal de reubicaciones-->
+                        <div class="modal fade" id="ModalReubicacion<?php echo $item['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reubicar Estudiante</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="" method="POST">
+                                    <div class="modal-body">
+                                        <!-- mando el id del estudiante -->
+                                        <input type="hidden" name="id_estudiante" value="<?php echo $item['id']; ?>">
+                                        <h5><?php echo $item['nombre']; ?></h5>
+                                        <p><strong>Bootcamp Actual: </strong> <?php echo $item['bootcamp']; ?></p>
+
+                                            <label for="" class="form-label">Cambiar Bootcamp</label>
+                                            <select name="bootcamp" class="form-control" id="">
+                                                <option value="">...</option>
+                                                <!--- iteramos los bootcamps que hay en la bd -->
+                                                <?php
+                                                    foreach($arreglo_bootcamps as $bootcamp){
+                                                ?>
+                                                    <option value="<?php echo $bootcamp["id"]; ?>"><?php echo $bootcamp["bootcamp"]; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <input type="submit" class="btn btn-danger" value="Reubicar Estudiante">
+                                    </div>
+                                </form>
+
+                                <?php $estudiante->actualizarReubicacion(); ?>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                 </tbody>
             </table>

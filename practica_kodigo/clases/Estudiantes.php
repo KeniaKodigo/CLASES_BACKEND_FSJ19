@@ -153,6 +153,56 @@ class Estudiante extends Conexion{
             }
         }
     }
+
+    #metodo para seleccionar el estado
+    public function estadoByAsincronoActivoDesercion(){
+        $pdo = $this->conectar();
+        $query = $pdo->query("SELECT * FROM estado WHERE id = 2 OR id = 4 OR id = 1");
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC); //[]
+        return $resultado;
+    }
+
+    #actualizando el estado del estudiante
+    public function actualizarEstado(){
+        if(isset($_POST['id_estudiante'], $_POST['estado'])){
+            $this->id = $_POST['id_estudiante'];
+            $estado = $_POST['estado'];
+
+            $pdo = $this->conectar();
+            $query = $pdo->prepare("UPDATE estudiantes SET id_estado = ? WHERE id = ?");
+            $resultado = $query->execute([$estado,$this->id]); //true o false
+            //true
+            if($resultado){
+                echo "<script>
+                    window.location = './estudiantes_activos.php'
+                </script>";
+            }else{
+                echo "Error al cambiar el estado";
+            }
+        }
+    }
+
+    #actualizando el estado del estudiante
+    public function actualizarReubicacion(){
+        if(isset($_POST['id_estudiante'], $_POST['bootcamp'])){
+            $this->id = $_POST['id_estudiante'];
+            $estado = 3; //representa en la bd a "reubicacion"
+            $this->id_bootcamp = $_POST['bootcamp'];
+
+            $pdo = $this->conectar();
+            $query = $pdo->prepare("UPDATE estudiantes SET id_estado = ?, id_bootcamp = ? WHERE id = ?");
+            $resultado = $query->execute([$estado,$this->id_bootcamp,$this->id]); //true o false
+            //true
+            if($resultado){
+                echo "<script>
+                    window.location = './estudiantes_activos.php'
+                </script>";
+            }else{
+                echo "Error al reubicar el estudiante";
+            }
+        }
+    }
 }
 
 ?>

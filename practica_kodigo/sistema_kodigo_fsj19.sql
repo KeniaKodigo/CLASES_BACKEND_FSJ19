@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2023 a las 04:14:08
+-- Tiempo de generación: 20-12-2023 a las 03:51:51
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sistema_kodigo_fsj19`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `correo` varchar(50) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  `id_rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `admin`
+--
+
+INSERT INTO `admin` (`id`, `nombre`, `correo`, `password`, `id_rol`) VALUES
+(1, 'Kenia Paiz', 'keniapaiz@gmail.com', 'kenia', 1);
 
 -- --------------------------------------------------------
 
@@ -42,7 +63,8 @@ INSERT INTO `bootcamps` (`id`, `bootcamp`) VALUES
 (3, 'Full Stack Junior 19'),
 (4, 'Java Developer 5'),
 (5, 'Web Developer 6'),
-(6, 'Web Developer 7');
+(6, 'Web Developer 7'),
+(7, 'prueba23');
 
 -- --------------------------------------------------------
 
@@ -146,9 +168,9 @@ CREATE TABLE `estudiantes` (
 --
 
 INSERT INTO `estudiantes` (`id`, `nombre`, `direccion`, `telefono`, `carnet`, `correo`, `password`, `id_bootcamp`, `id_estado`, `id_rol`) VALUES
-(1, 'Diego Alexander Vasquez', 'Tejutla, Chalate', 7890745, 'KD0002023', 'diego@gmail.com', 'Kodigo2023', 2, 1, 3),
-(2, 'Jose Luis Villalta', 'San Ignacio, Chalatenango', 70894567, 'KJ004', 'luis@hotmail.com', 'Kodigo2023', 3, 1, 3),
-(3, 'Claudia Vasquez Hernandez', 'Citala, Chalatenango', 78542123, 'pr2023', 'clauvasquez@yahoo.com', 'Kodigo2023', 4, 1, 3),
+(1, 'Diego Alexander Vasquez', 'Tejutla, Chalate', 7890745, 'KD0002023', 'diego@gmail.com', 'Kodigo2023', 3, 3, 3),
+(2, 'Jose Luis Villalta', 'San Ignacio, Chalatenango', 70894567, 'KJ004', 'luis@hotmail.com', 'Kodigo2023', 4, 3, 3),
+(3, 'Claudia Vasquez Hernandez', 'Citala, Chalatenango', 78542123, 'pr2023', 'clauvasquez@yahoo.com', 'Kodigo2023', 4, 4, 3),
 (4, 'prueba2', 'prueba2dire', 76546373, 'prueba2023', 'prueba@hotmail.com', 'Kodigo2023', 3, 4, 3);
 
 -- --------------------------------------------------------
@@ -194,6 +216,13 @@ INSERT INTO `roles` (`id`, `rol`) VALUES
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_rol` (`id_rol`);
 
 --
 -- Indices de la tabla `bootcamps`
@@ -256,10 +285,16 @@ ALTER TABLE `roles`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `bootcamps`
 --
 ALTER TABLE `bootcamps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `coaches`
