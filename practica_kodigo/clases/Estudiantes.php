@@ -203,6 +203,18 @@ class Estudiante extends Conexion{
             }
         }
     }
+
+    #perfil del estudiante en base al inicio de sesion
+    public function verPerfil(){
+        /**SELECT estudiantes.nombre, estudiantes.carnet, estudiantes.direccion, estudiantes.telefono, estudiantes.correo, bootcamps.bootcamp FROM estudiantes INNER JOIN bootcamps ON estudiantes.id_bootcamp = bootcamps.id WHERE estudiantes.id = $_SESSION['id_estudiante']; */
+
+        $id = $_SESSION['id_estudiante'];
+        $pdo = $this->conectar();
+        $query = $pdo->query("SELECT estudiantes.nombre, estudiantes.carnet, estudiantes.direccion, estudiantes.telefono, estudiantes.correo, bootcamps.bootcamp FROM estudiantes INNER JOIN bootcamps ON estudiantes.id_bootcamp = bootcamps.id WHERE estudiantes.id = $id");
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC); //[]
+        return $resultado;
+    }
 }
 
 ?>

@@ -1,3 +1,11 @@
+<?php 
+    //iniciando la sesion
+    session_start();
+
+    if(!isset($_SESSION['id_admin'])){
+        include "./notFound.php";
+    }else{
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,3 +43,5 @@
 <script src="assets/js/main.js"></script>
 </body>
 </html>
+
+<?php } ?>

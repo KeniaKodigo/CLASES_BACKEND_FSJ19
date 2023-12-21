@@ -1,4 +1,3 @@
-
 <?php
     //metodo para cerrar sesion
     function cerrarSesion(){
@@ -17,19 +16,13 @@
         <div class="profile">
         <img src="assets/img/profile-logo.png" alt="" class="img-fluid rounded-circle">
         <!-- mandamos a llamar la session que tiene el nombre del usuario -->
-        <h1 class="text-light"><a href="#"></a><?php echo $_SESSION['nombre_admin']; ?></h1>
+        <h1 class="text-light"><a href="#"></a></h1>
         </div>
 
         <nav id="navbar" class="nav-menu navbar">
         <ul>
             <li>
                 <a href="#" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a>
-            </li>
-            <li>
-                <a href="./estudiantes_activos.php" class="nav-link scrollto"><i class="bx bxs-user-detail"></i> <span>Gestion Estudiantes</span></a>
-            </li>
-            <li>
-                <a href="#" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Gestion Profesores</span></a>
             </li>
             <li>
                 <form action="" method="post">

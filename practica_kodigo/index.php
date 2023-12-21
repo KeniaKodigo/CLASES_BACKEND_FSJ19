@@ -1,3 +1,7 @@
+<?php 
+    //iniciando la sesion
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +25,10 @@
 
 <body>
     <main>
+        <?php
+            require "./clases/Autenticacion.php";
+            $autenticar = new Autenticacion();
+        ?>
         <section class="container">
             <form method="POST">
                 <div class="mb-3">
@@ -34,6 +42,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
             </form>
+            <?php $autenticar->autenticarUsuario(); ?>
         </section>
     </main>
 
